@@ -20,6 +20,8 @@ token_T* lexerGetNextToken(lexer_T* lexer);
 
 token_T* lexerCollectString(lexer_T* lexer); 
 
-char* lexerGetCurrentCharAsString(lexer_T* lexer);
+token_T* lexerAdvanceWithToken (lexer_T* lexer, token_T* token);
+
+char* lexerGetCurrentCharAsString(lexer_T* lexer); 
 
 #endif
