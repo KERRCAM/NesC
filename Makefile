@@ -8,7 +8,11 @@ $(exec): $(objects)
 	 
 
 %.o: %.c include/%.h 
-	gcc -c $(flags) $< -o $@ 
+	gcc -c $(flags) $< -o $@  
+
+install: 
+	make 
+	cp .NesC.out /usr/local/bin/NesC
 
 clean: 
 	-rm *.out 

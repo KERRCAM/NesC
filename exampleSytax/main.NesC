@@ -1,0 +1,7 @@
+int n1 = 10 
+float n2 = 4.5 
+
+print (* n1 n2) 
+result -> 45.0 
+
+--haskell, java, python hybrid is the main idea
