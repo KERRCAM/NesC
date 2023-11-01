@@ -5,7 +5,8 @@ typedef struct TOKEN_STRUCT
     enum 
     { 
         TOKEN_ID, 
-        TOKEN_EQUALS, 
+        TOKEN_EQUALS,  
+        TOKEN_SEMI,
         TOKEN_STRING, 
         TOKEN_INT,
         TOKEN_LPAREN, 

@@ -18,7 +18,9 @@ void lexerSkipWhitespace(lexer_T* lexer);
 
 token_T* lexerGetNextToken(lexer_T* lexer); 
 
-token_T* lexerCollectString(lexer_T* lexer); 
+token_T* lexerCollectString(lexer_T* lexer);  
+
+token_T* lexerCollectID(lexer_T* lexer);  
 
 token_T* lexerAdvanceWithToken (lexer_T* lexer, token_T* token);
 
