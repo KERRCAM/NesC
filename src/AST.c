@@ -19,7 +19,11 @@ AST_T* initAST(int type)
     ast->functionCallArgumentsSize = 0;
 
     /* AST_STRING */ 
-    ast->stringValue = (void*) 0;
+    ast->stringValue = (void*) 0; 
+
+    /* AST_COMPOUND */ 
+    ast->compound_value = (void*) 0;
+    ast->compund_size = 0;
 
 
     return ast;
