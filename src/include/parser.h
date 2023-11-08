@@ -28,8 +28,13 @@ AST_T* parserParseTerm(parser_T* parser);
 
 AST_T* parserParseFuncCall(parser_T* parser); 
 
+AST_T* parserParseVarDef(parser_T* parser);
+
 AST_T* parserParseVar(parser_T* parser); 
 
 AST_T* parserParseStr(parser_T* parser);
+
+AST_T* parserParseID(parser_T* parser);
+
 
 #endif
