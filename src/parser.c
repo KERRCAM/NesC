@@ -62,7 +62,10 @@ AST_T* parserParseStatements(parser_T* parser)
 
 AST_T* parserParseExpresions(parser_T* parser)
 { 
-
+    switch (parser->current_token->type)
+    { 
+        case TOKEN_STRING: return parserParseStr(parser);
+    }
 }
 
 AST_T* parserParseFactor(parser_T* parser)
@@ -97,12 +100,28 @@ AST_T* parserParseVarDef(parser_T* parser)
 
 AST_T* parserParseVar(parser_T* parser)
 { 
+    char* token_value = parser->current_token->value;
+    parserEat(parser, TOKEN_ID); 
 
+    if (parser->current_token->type == TOKEN_LPAREN)
+    { 
+        return parserParseFuncCall(parser); 
+    }
+
+    AST_T* ast_variabe = initAST(AST_VARIABLE);
+    ast_variabe->variableName = token_value;
+
+    return ast_variabe;
 } 
 
 AST_T* parserParseStr(parser_T* parser)
 { 
-    
+    AST_T* ast_string = initAST(AST_STRING); 
+    ast_string->stringValue = parser->current_token->value;
+
+    parserEat(parser, TOKEN_STRING);
+
+    return ast_string;
 }
 
 AST_T* parserParseID(parser_T* parser)
