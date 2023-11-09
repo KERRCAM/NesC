@@ -3,7 +3,7 @@
 #include <string.h>
 
 parser_T* initParser(lexer_T* lexer)
-{ 
+{   
     parser_T* parser = calloc(1, sizeof(struct PARSER_STRUCT));
     parser->lexer = lexer; 
     parser->current_token = lexerGetNextToken(lexer);
@@ -11,6 +11,7 @@ parser_T* initParser(lexer_T* lexer)
 
 void parserEat(parser_T* parser, int tokenType) 
 { 
+    
     if (parser->current_token->type == tokenType)
     { 
         parser->current_token = lexerGetNextToken(parser->lexer);
@@ -22,41 +23,44 @@ void parserEat(parser_T* parser, int tokenType)
             parser->current_token->value, 
             parser->current_token->type
         );
-        exit(1);
+        exit(1); // can use to diagnose where error is coming from? maybe
     }
 }
 
-AST_T* parserParse(parser_T* parser)
+AST_T* parserParse(parser_T* parser) //error l2
 {
     return parserParseStatements(parser);
 }
 
-AST_T* parserParseStatement(parser_T* parser)
+AST_T* parserParseStatement(parser_T* parser) //error l5
 { 
-    switch (parser->current_token->type)
+    //exit(1); 
+    switch (parser->current_token->type) // this line? -> look at all variable in the switch ig
     { 
+        exit(1); 
         case TOKEN_ID: return parserParseID(parser);
     }
 } 
 
-AST_T* parserParseStatements(parser_T* parser)
+AST_T* parserParseStatements(parser_T* parser) //error l3
 { 
     AST_T* compound = initAST(AST_COMPOUND);
     compound->compound_value = calloc(1, sizeof(struct AST_STRUCT*));
-
-    AST_T* ast_statement = parserParseStatement(parser);
+    
+    AST_T* ast_statement = parserParseStatement(parser); //error l4
     compound->compound_value[0] = ast_statement;
-
+    
     while (parser->current_token->type == TOKEN_SEMI)
     { 
+        
         parserEat(parser, TOKEN_SEMI);
-
+                   
         AST_T* ast_statement = parserParseStatement(parser);
         compound->compund_size += 1;
         compound->compound_value = realloc(compound->compound_value, compound->compund_size * sizeof(struct AST_STRUCT));
         compound->compound_value[compound->compund_size-1] = ast_statement;
     }
-
+    
     return compound;
 }
 

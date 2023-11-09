@@ -4,15 +4,18 @@
 
 int main(int argc, char* argv[]) 
 { 
+    
     lexer_T* lexer = initLexer( 
         "var name = \"test print\";" 
         "print(name);"
 
     ); 
-
+       
+    
     parser_T* parser = initParser(lexer); 
-    AST_T* root = parserParse(parser); 
-
+    
+    AST_T* root = parserParse(parser); //error l1
+    
     printf("%d\n", root->type);
     printf("%d\n", root->compund_size);
 
